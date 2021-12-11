@@ -1,0 +1,13 @@
+package org.colosseumproject.ludus;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class LudusApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(LudusApplication.class, args);
+	}
+
+}
