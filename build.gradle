@@ -4,7 +4,7 @@ plugins {
 	id 'java'
 }
 
-group = 'org.colosseum-project'
+group = 'org.colosseumproject'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
