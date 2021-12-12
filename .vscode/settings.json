@@ -1,0 +1,11 @@
+{
+  // See https://code.visualstudio.com/docs/getstarted/settings
+  // for the documentation about the settings.json format
+  "[java]": {
+    "editor.formatOnSave": true,
+    "editor.tabSize": 4,
+    "editor.insertSpaces": false,
+    "editor.detectIndentation": false,
+  },
+  "trailing-spaces.trimOnSave": true,
+}
