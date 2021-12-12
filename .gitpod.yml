@@ -4,7 +4,7 @@ ports:
 
 tasks:
   - init: gradle build -x test
-    command: gradle runBoot
+    command: gradle bootRun
 
 image:
   file: .gitpod.Dockerfile
