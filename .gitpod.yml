@@ -15,7 +15,6 @@ vscode:
     - redhat.java
     - vscjava.vscode-java-debug
     - vscjava.vscode-java-test
-    - vscjava.vscode-gradle
     - pivotal.vscode-spring-boot
     - DavidAnson.vscode-markdownlint
     - Gruntfuggly.todo-tree
