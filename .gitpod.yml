@@ -3,8 +3,8 @@ ports:
   onOpen: open-preview
 
 tasks:
-  - init: gradle build -x test
-    command: gradle bootRun
+  - init: ./gradlew build -x test
+    command: ./gradlew bootRun
 
 image:
   file: .gitpod.Dockerfile
