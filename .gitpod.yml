@@ -3,7 +3,8 @@ ports:
   onOpen: open-preview
 
 tasks:
-  - init: ./gradlew build -x test
+  - before: chmod +x ./gradlew
+    init: ./gradlew build -x test
     command: ./gradlew bootRun
 
 image:
