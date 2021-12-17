@@ -22,7 +22,7 @@ _Note: Theses instructions are for linux base systems. Please, adapt them if you
    export SPRING_PROFILES_ACTIVE=development
    ```
 
-   _This profiles use an in-memory database on H2 Database Engine._
+   _This profile use an in-memory database on H2 Database Engine._
    _You can access to the console via `/h2-console`._
 
 3. Run the application
@@ -34,7 +34,7 @@ _Note: Theses instructions are for linux base systems. Please, adapt them if you
 ### Run with a production-style database
 
 _We recommand to use a MariaDB database in production, as we have tested it._
-_However, feel free to use any other database engine supported by Spring Boot._
+_However, feel free to use another database engine supported by Spring Boot._
 
 The following instructions use a MariaDB database that runs on a local Docker instance:
 
