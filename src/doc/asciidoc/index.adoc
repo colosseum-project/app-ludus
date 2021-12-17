@@ -1,0 +1,83 @@
+= Getting Started With Spring REST Docs
+
+This is an example output for a service running at http://localhost:8080.
+
+== Find all gladiators
+
+.request
+include::{snippets}/gladiators/find-all/http-request.adoc[]
+
+.request with cURL
+include::{snippets}/gladiators/find-all/curl-request.adoc[]
+
+.response
+include::{snippets}/gladiators/find-all/http-response.adoc[]
+include::{snippets}/gladiators/find-all/response-fields.adoc[]
+
+== Find a gladiator
+
+.request
+include::{snippets}/gladiators/find-one/http-request.adoc[]
+
+.request with cURL
+include::{snippets}/gladiators/find-one/curl-request.adoc[]
+
+.response
+include::{snippets}/gladiators/find-one/http-response.adoc[]
+include::{snippets}/gladiators/find-one/response-fields.adoc[]
+
+== Find a gladiator by name
+
+.request
+include::{snippets}/gladiators/find-one-by-name/http-request.adoc[]
+
+.request with cURL
+include::{snippets}/gladiators/find-one-by-name/curl-request.adoc[]
+
+.response
+include::{snippets}/gladiators/find-one-by-name/http-response.adoc[]
+include::{snippets}/gladiators/find-one-by-name/response-fields.adoc[]
+
+== Add a new gladiator
+
+.request
+include::{snippets}/gladiators/new-one/http-request.adoc[]
+
+.request with cURL
+include::{snippets}/gladiators/new-one/curl-request.adoc[]
+
+.response
+include::{snippets}/gladiators/new-one/http-response.adoc[]
+
+== Delete an existing gladiator
+
+.request
+include::{snippets}/gladiators/delete-one/http-request.adoc[]
+
+.request with cURL
+include::{snippets}/gladiators/delete-one/curl-request.adoc[]
+
+.response
+include::{snippets}/gladiators/delete-one/http-response.adoc[]
+
+== Edit an existing gladiator
+
+.request
+include::{snippets}/gladiators/edit-one/http-request.adoc[]
+
+.request with cURL
+include::{snippets}/gladiators/edit-one/curl-request.adoc[]
+
+.response
+include::{snippets}/gladiators/edit-one/http-response.adoc[]
+
+== Get gladiator count
+
+.request
+include::{snippets}/gladiators/count/http-request.adoc[]
+
+.request with cURL
+include::{snippets}/gladiators/count/curl-request.adoc[]
+
+.response
+include::{snippets}/gladiators/count/http-response.adoc[]

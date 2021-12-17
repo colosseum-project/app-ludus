@@ -1,0 +1,10 @@
+spring:
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+  datasource:
+    url: ${DB_URL:jdbc:mariadb://localhost:3306/ludus}
+    username: ${DB_USERNAME:ludus}
+    password: ${DB_PASSWORD:ludus}

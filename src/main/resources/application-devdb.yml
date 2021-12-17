@@ -1,0 +1,14 @@
+spring:
+  jpa:
+    database: h2
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+    open-in-view: false
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:h2:mem:mydb
+    username: ludus
+    password: ludus
