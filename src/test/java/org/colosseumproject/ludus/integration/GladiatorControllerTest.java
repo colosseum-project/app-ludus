@@ -42,7 +42,8 @@ public class GladiatorControllerTest {
 				.andExpect(content().contentType("application/json"))
 				.andDo(document("gladiators/find-all", responseFields(
 						fieldWithPath("[].id").description("ID of the gladiator"),
-						fieldWithPath("[].name").description("Name of the gladiator"))));
+						fieldWithPath("[].name").description("Name of the gladiator"),
+						fieldWithPath("[].type").description("Type of gladiator"))));
 	}
 
 	@Test
@@ -52,10 +53,11 @@ public class GladiatorControllerTest {
 				.andDo(print())
 				.andExpect(status().isOk())
 				.andExpect(content().contentType("application/json"))
-				.andExpect(content().json("{\"id\":1,\"name\":\"Maxentius\"}"))
+				.andExpect(content().json("{\"id\":1,\"name\":\"Maxentius\"},\"type\":\"MURMILLO\"}"))
 				.andDo(document("gladiators/find-one", responseFields(
 						fieldWithPath("id").description("ID of the gladiator"),
-						fieldWithPath("name").description("Name of the gladiator"))));
+						fieldWithPath("name").description("Name of the gladiator"),
+						fieldWithPath("type").description("Type of gladiator"))));
 	}
 
 	@Test
@@ -65,28 +67,30 @@ public class GladiatorControllerTest {
 				.andDo(print())
 				.andExpect(status().isOk())
 				.andExpect(content().contentType("application/json"))
-				.andExpect(content().json("{\"id\":2,\"name\":\"Spartacus\"}"));
+				.andExpect(content().json("{\"id\":2,\"name\":\"Spartacus\",\"type\":\"MURMILLO\"}"));
 	}
 
 	@Test
 	@Order(4)
-	public void shouldFindTheFifthGladiatorByName() throws Exception {
-		mvc.perform(get("/gladiators/name/Bonus"))
+	public void shouldFindTheThirdGladiatorByName() throws Exception {
+		mvc.perform(get("/gladiators/name/Atius"))
 				.andDo(print())
 				.andExpect(status().isOk())
-				.andExpect(content().json("{\"id\":5,\"name\":\"Bonus\"}"))
+				.andExpect(content().json("{\"id\":3,\"name\":\"Atius\",\"type\":\"THRAEX\"}"))
 				.andDo(document("gladiators/find-one-by-name", responseFields(
 						fieldWithPath("id").description("ID of the gladiator"),
-						fieldWithPath("name").description("Name of the gladiator"))));
+						fieldWithPath("name").description("Name of the gladiator"),
+						fieldWithPath("type").description("Type of gladiator"))));
 	}
 
 	@Test
 	@Order(5)
 	public void shouldAddNewGladiator() throws Exception {
-		mvc.perform(post("/gladiators").contentType("application/json").content("{\"name\":\"Testus\"}"))
+		mvc.perform(post("/gladiators").contentType("application/json")
+				.content("{\"name\":\"Testus\",\"type\":\"MURMILLO\"}"))
 				.andDo(print())
 				.andExpect(status().isOk())
-				.andExpect(content().json("{\"id\":23,\"name\":\"Testus\"}"))
+				.andExpect(content().json("{\"id\":23,\"name\":\"Testus\",\"type\":\"MURMILLO\"}"))
 				.andDo(document("gladiators/new-one"));
 	}
 
@@ -96,7 +100,7 @@ public class GladiatorControllerTest {
 		mvc.perform(delete("/gladiators/3"))
 				.andDo(print())
 				.andExpect(status().isOk())
-				.andExpect(content().json("{\"id\":3,\"name\":\"Atius\"}"))
+				.andExpect(content().json("{\"id\":3,\"name\":\"Atius\",\"type\":\"THRAEX\"}"))
 				.andDo(document("gladiators/delete-one"));
 	}
 
@@ -106,7 +110,7 @@ public class GladiatorControllerTest {
 		mvc.perform(put("/gladiators/4").contentType("application/json").content("{\"name\":\"Hicarus\"}"))
 				.andDo(print())
 				.andExpect(status().isOk())
-				.andExpect(content().json("{\"id\":4,\"name\":\"Hicarus\"}"))
+				.andExpect(content().json("{\"id\":4,\"name\":\"Hicarus\",\"type\":\"DIMACHAERUS\"}"))
 				.andDo(document("gladiators/edit-one"));
 	}
 
@@ -118,6 +122,16 @@ public class GladiatorControllerTest {
 				.andExpect(status().isOk())
 				.andExpect(content().string("22"))
 				.andDo(document("gladiators/count"));
+	}
+
+	@Test
+	@Order(9)
+	public void shouldGetGladiatorTypes() throws Exception {
+		mvc.perform(get("/gladiators/types"))
+				.andDo(print())
+				.andExpect(status().isOk())
+				.andExpect(content().string(org.hamcrest.Matchers.containsString("MURMILLO")))
+				.andDo(document("gladiators/types"));
 	}
 
 }

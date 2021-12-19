@@ -1,5 +1,9 @@
 package org.colosseumproject.ludus.controller;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,11 +15,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
-import org.colosseumproject.ludus.domain.Gladiator;
 import org.colosseumproject.ludus.repository.GladiatorRepository;
+import org.colosseumproject.ludus.view.GladiatorViews;
 import org.colosseumproject.ludus.exception.GladiatorNotFoundException;
+import org.colosseumproject.ludus.model.Gladiator;
+import org.colosseumproject.ludus.model.GladiatorType;
 import org.colosseumproject.ludus.exception.GladiatorAlreadyExistsException;
 
 @RestController
@@ -25,27 +29,72 @@ public class GladiatorController {
 	@Autowired
 	private GladiatorRepository gladiators;
 
+	private Gladiator findOne(Integer id) {
+		return gladiators.findById(id).orElseThrow(() -> new GladiatorNotFoundException(id));
+	}
+
+	private Gladiator findOneByName(String name) {
+		Gladiator gladiator = gladiators.findByName(name);
+		if (gladiator == null) {
+			throw new GladiatorNotFoundException(name);
+		}
+		return gladiator;
+	}
+
 	@GetMapping("")
+	@JsonView(GladiatorViews.Summary.class)
 	ResponseEntity<List<Gladiator>> findAll() {
 		return ResponseEntity.ok(gladiators.findAll());
 	}
 
 	@GetMapping("/{id}")
-	ResponseEntity<Gladiator> findOne(@PathVariable Integer id) {
-		return ResponseEntity.ok(gladiators.findById(id)
-				.orElseThrow(() -> new GladiatorNotFoundException(id)));
+	@JsonView(GladiatorViews.Summary.class)
+	ResponseEntity<Gladiator> findOneSummary(@PathVariable Integer id) {
+		return ResponseEntity.ok(findOne(id));
+	}
+
+	@GetMapping("/{id}/ability")
+	@JsonView(GladiatorViews.Ability.class)
+	ResponseEntity<Gladiator> findOneAbility(@PathVariable Integer id) {
+		return ResponseEntity.ok(findOne(id));
+	}
+
+	@GetMapping("/{id}/equipment")
+	@JsonView(GladiatorViews.Equipment.class)
+	ResponseEntity<Gladiator> findOneEquipment(@PathVariable Integer id) {
+		return ResponseEntity.ok(findOne(id));
+	}
+
+	@GetMapping("/{id}/full")
+	ResponseEntity<Gladiator> findOneFull(@PathVariable Integer id) {
+		return ResponseEntity.ok(findOne(id));
 	}
 
 	@GetMapping("/name/{name}")
-	ResponseEntity<Gladiator> findOneByName(@PathVariable String name) {
-		Gladiator gladiator = gladiators.findByName(name);
-		if (gladiator == null) {
-			throw new GladiatorNotFoundException(name);
-		}
-		return ResponseEntity.ok(gladiator);
+	@JsonView(GladiatorViews.Summary.class)
+	ResponseEntity<Gladiator> findOneByNameSummary(@PathVariable String name) {
+		return ResponseEntity.ok(findOneByName(name));
+	}
+
+	@GetMapping("/name/{name}/ability")
+	@JsonView(GladiatorViews.Ability.class)
+	ResponseEntity<Gladiator> findOneByNameAbility(@PathVariable String name) {
+		return ResponseEntity.ok(findOneByName(name));
+	}
+
+	@GetMapping("/name/{name}/equipment")
+	@JsonView(GladiatorViews.Equipment.class)
+	ResponseEntity<Gladiator> findOneByNameEquipment(@PathVariable String name) {
+		return ResponseEntity.ok(findOneByName(name));
+	}
+
+	@GetMapping("/name/{name}/full")
+	ResponseEntity<Gladiator> findOneByNameFull(@PathVariable String name) {
+		return ResponseEntity.ok(findOneByName(name));
 	}
 
 	@PostMapping("")
+	@JsonView(GladiatorViews.Summary.class)
 	ResponseEntity<Gladiator> newOne(@RequestBody Gladiator gladiator) {
 		String name = gladiator.getName();
 		if (gladiators.findByName(name) != null) {
@@ -55,6 +104,7 @@ public class GladiatorController {
 	}
 
 	@DeleteMapping("/{id}")
+	@JsonView(GladiatorViews.Summary.class)
 	ResponseEntity<Gladiator> deleteOne(@PathVariable Integer id) {
 		return gladiators.findById(id)
 				.map(gladiator -> {
@@ -65,6 +115,7 @@ public class GladiatorController {
 	}
 
 	@PutMapping("/{id}")
+	@JsonView(GladiatorViews.Summary.class)
 	ResponseEntity<Gladiator> editOne(@PathVariable Integer id, @RequestBody Gladiator newGladiator) {
 		return gladiators.findById(id)
 				.map(gladiator -> {
@@ -81,6 +132,11 @@ public class GladiatorController {
 	@GetMapping("/count")
 	ResponseEntity<Long> count() {
 		return ResponseEntity.ok(gladiators.count());
+	}
+
+	@GetMapping("/types")
+	ResponseEntity<GladiatorType[]> findAllTypes() {
+		return ResponseEntity.ok(GladiatorType.values());
 	}
 
 }

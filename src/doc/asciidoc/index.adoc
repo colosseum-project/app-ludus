@@ -26,6 +26,8 @@ include::{snippets}/gladiators/find-one/curl-request.adoc[]
 include::{snippets}/gladiators/find-one/http-response.adoc[]
 include::{snippets}/gladiators/find-one/response-fields.adoc[]
 
+Use `/full`, `/ability` or `/equipment` to get more details about the gladiator.
+
 == Find a gladiator by name
 
 .request
@@ -37,6 +39,8 @@ include::{snippets}/gladiators/find-one-by-name/curl-request.adoc[]
 .response
 include::{snippets}/gladiators/find-one-by-name/http-response.adoc[]
 include::{snippets}/gladiators/find-one-by-name/response-fields.adoc[]
+
+Use `/full`, `/ability` or `/equipment` to get more details about the gladiator.
 
 == Add a new gladiator
 
@@ -81,3 +85,14 @@ include::{snippets}/gladiators/count/curl-request.adoc[]
 
 .response
 include::{snippets}/gladiators/count/http-response.adoc[]
+
+== Get gladiator types
+
+.request
+include::{snippets}/gladiators/types/http-request.adoc[]
+
+.request with cURL
+include::{snippets}/gladiators/types/curl-request.adoc[]
+
+.response
+include::{snippets}/gladiators/types/http-response.adoc[]

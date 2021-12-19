@@ -1,4 +1,4 @@
-package org.colosseumproject.ludus.domain;
+package org.colosseumproject.ludus.model;
 
 import java.io.Serializable;
 
