@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  database:
+    image: mariadb:latest
+    ports:
+      - 3306:3306
+    volumes:
+      - data:/var/lib/postgresql/data
+    restart: always
+    environment:
+      MARIADB_DATABASE: ludus
+      MARIADB_USER: ludus
+      MARIADB_PASSWORD: ludus
+      MARIADB_ROOT_PASSWORD: toor
+  ludus:
+    depends_on:
+      - database
+    image: ludus:latest
+    ports:
+      - 8080:8080
+    restart: always
+    environment:
+      DB_URL: jdbc:mariadb://database:3306/ludus
+      DB_USERNAME:
+      DB_PASSWORD:
+
+volumes:
+  data:
