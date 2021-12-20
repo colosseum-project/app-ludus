@@ -87,28 +87,27 @@ public class Gladiator extends BaseEntity {
 	}
 
 	@JsonView(GladiatorViews.Equipment.class)
-	public Map<String, Object> getWeapon() {
+	public Map<String, Object> getEquipment() {
+		Map<String, Object> equipment = new HashMap<String, Object>();
+
 		Map<String, Object> weapon = new HashMap<String, Object>();
 		weapon.put("name", type.getWeapon().getName());
-		weapon.put("description", type.getWeapon().getDescription());
+		weapon.put("type", type.getWeapon().getType());
 
-		Map<String, Integer> damage = new HashMap<String, Integer>();
-		damage.put("minimum", type.getWeapon().getDamage().getMinimum());
-		damage.put("maximum", type.getWeapon().getDamage().getMaximum());
-		damage.put("criticalPercentage", type.getWeapon().getDamage().getCriticalPercentage());
-		weapon.put("damage", damage);
+		Map<String, Integer> weaponDamage = new HashMap<String, Integer>();
+		weaponDamage.put("minimum", type.getWeapon().getDamage().getMinimum());
+		weaponDamage.put("maximum", type.getWeapon().getDamage().getMaximum());
+		weaponDamage.put("criticalPercentage", type.getWeapon().getDamage().getCriticalPercentage());
+		weapon.put("damage", weaponDamage);
 
-		return weapon;
-	}
+		equipment.put("weapon", weapon);
 
-	@JsonView(GladiatorViews.Equipment.class)
-	public List<Object> getArmour() {
 		List<Object> armour = new ArrayList<Object>();
 
 		for (ArmourComponent armourComponent : type.getArmourSet()) {
 			Map<String, Object> component = new HashMap<String, Object>();
 			component.put("name", armourComponent.getName());
-			component.put("description", armourComponent.getDescription());
+			component.put("type", armourComponent.getType());
 
 			Map<String, Integer> resistance = new HashMap<String, Integer>();
 			resistance.put("head", armourComponent.getResistance().getHead());
@@ -119,7 +118,9 @@ public class Gladiator extends BaseEntity {
 			armour.add(component);
 		}
 
-		return armour;
+		equipment.put("armour", armour);
+
+		return equipment;
 	}
 
 }

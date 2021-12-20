@@ -3,22 +3,22 @@ package org.colosseumproject.ludus.model;
 enum Weapon {
 
 	GLADIUS(
-			"Gladius", "Short sword",
+			"gladius", "short_sword",
 			new WeaponDamage(10, 20, 10)),
 	DUALGLADIUS(
-			"Dual gladius", "Dual short swords",
+			"dual gladius", "dual_short_swords",
 			new WeaponDamage(15, 25, 15)),
 	SICA(
-			"Sica", "Curved large dagger",
+			"sica", "curved_dagger",
 			new WeaponDamage(5, 15, 20));
 
 	private String name;
-	private String description;
+	private String type;
 	private WeaponDamage damage;
 
-	Weapon(String name, String description, WeaponDamage damage) {
+	Weapon(String name, String type, WeaponDamage damage) {
 		this.name = name;
-		this.description = description;
+		this.type = type;
 		this.damage = damage;
 	}
 
@@ -26,8 +26,8 @@ enum Weapon {
 		return name;
 	}
 
-	String getDescription() {
-		return description;
+	String getType() {
+		return type;
 	}
 
 	WeaponDamage getDamage() {

@@ -3,34 +3,34 @@ package org.colosseumproject.ludus.model;
 public enum ArmourComponent {
 
 	SCUTUM(
-			"Scutum", "Rectangular shield",
+			"scutum", "rectangular_shield",
 			new ArmourResistance(0, 3, 2)),
 	PARMA(
-			"Parma", "Round shield",
+			"parma", "round_shield",
 			new ArmourResistance(0, 4, 0)),
 	CASSISCRISTA(
-			"Cassis crista", "Heavy bronze helmet",
+			"cassis crista", "heavy_helmet",
 			new ArmourResistance(3, 0, 0)),
 	GALEA(
-			"Galea", "Plumed helmet",
+			"galea", "plumed_helmet",
 			new ArmourResistance(2, 0, 0)),
 	MANICAE(
-			"Manicae", "Arm guard",
+			"manicae", "arm_guard",
 			new ArmourResistance(0, 3, 0)),
 	OCREA(
-			"Ocrea", "Greaves",
+			"ocrea", "greave",
 			new ArmourResistance(0, 0, 3)),
 	BALTEUS(
-			"Balteus", "Belt worn over one shoulder",
+			"balteus", "belt",
 			new ArmourResistance(0, 1, 0));
 
 	private String name;
-	private String description;
+	private String type;
 	private ArmourResistance resistance;
 
-	ArmourComponent(String name, String description, ArmourResistance resistance) {
+	ArmourComponent(String name, String type, ArmourResistance resistance) {
 		this.name = name;
-		this.description = description;
+		this.type = type;
 		this.resistance = resistance;
 	}
 
@@ -38,8 +38,8 @@ public enum ArmourComponent {
 		return name;
 	}
 
-	String getDescription() {
-		return description;
+	String getType() {
+		return type;
 	}
 
 	ArmourResistance getResistance() {
