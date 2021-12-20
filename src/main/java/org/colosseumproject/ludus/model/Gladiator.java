@@ -1,6 +1,8 @@
 package org.colosseumproject.ludus.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.persistence.Column;
@@ -100,10 +102,9 @@ public class Gladiator extends BaseEntity {
 	}
 
 	@JsonView(GladiatorViews.Equipment.class)
-	public Map<String, Object> getArmour() {
-		Map<String, Object> armour = new HashMap<String, Object>();
+	public List<Object> getArmour() {
+		List<Object> armour = new ArrayList<Object>();
 
-		Integer armourComponentIndex = 1;
 		for (ArmourComponent armourComponent : type.getArmourSet()) {
 			Map<String, Object> component = new HashMap<String, Object>();
 			component.put("name", armourComponent.getName());
@@ -115,8 +116,7 @@ public class Gladiator extends BaseEntity {
 			resistance.put("lowerBody", armourComponent.getResistance().getLowerBody());
 			component.put("resistance", resistance);
 
-			armour.put("component" + armourComponentIndex, component);
-			armourComponentIndex++;
+			armour.add(component);
 		}
 
 		return armour;
