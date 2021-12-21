@@ -92,7 +92,6 @@ public class Gladiator extends BaseEntity {
 
 		Map<String, Object> weapon = new HashMap<String, Object>();
 		weapon.put("name", type.getWeapon().getName());
-		weapon.put("type", type.getWeapon().getType());
 
 		Map<String, Integer> weaponDamage = new HashMap<String, Integer>();
 		weaponDamage.put("minimum", type.getWeapon().getDamage().getMinimum());
@@ -107,13 +106,12 @@ public class Gladiator extends BaseEntity {
 		for (ArmourComponent armourComponent : type.getArmourSet()) {
 			Map<String, Object> component = new HashMap<String, Object>();
 			component.put("name", armourComponent.getName());
-			component.put("type", armourComponent.getType());
 
-			Map<String, Integer> resistance = new HashMap<String, Integer>();
-			resistance.put("head", armourComponent.getResistance().getHead());
-			resistance.put("upperBody", armourComponent.getResistance().getUpperBody());
-			resistance.put("lowerBody", armourComponent.getResistance().getLowerBody());
-			component.put("resistance", resistance);
+			Map<String, Integer> componentResistance = new HashMap<String, Integer>();
+			componentResistance.put("head", armourComponent.getResistance().getHead());
+			componentResistance.put("upperBody", armourComponent.getResistance().getUpperBody());
+			componentResistance.put("lowerBody", armourComponent.getResistance().getLowerBody());
+			component.put("resistance", componentResistance);
 
 			armour.add(component);
 		}
