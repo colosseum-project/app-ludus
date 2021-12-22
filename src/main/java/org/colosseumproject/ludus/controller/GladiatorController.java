@@ -53,9 +53,9 @@ public class GladiatorController {
 		return ResponseEntity.ok(findOne(id));
 	}
 
-	@GetMapping("/{id}/ability")
-	@JsonView(GladiatorViews.Ability.class)
-	ResponseEntity<Gladiator> findOneAbility(@PathVariable Integer id) {
+	@GetMapping("/{id}/attributes")
+	@JsonView(GladiatorViews.Attributes.class)
+	ResponseEntity<Gladiator> findOneAttributes(@PathVariable Integer id) {
 		return ResponseEntity.ok(findOne(id));
 	}
 
@@ -76,9 +76,9 @@ public class GladiatorController {
 		return ResponseEntity.ok(findOneByName(name));
 	}
 
-	@GetMapping("/name/{name}/ability")
-	@JsonView(GladiatorViews.Ability.class)
-	ResponseEntity<Gladiator> findOneByNameAbility(@PathVariable String name) {
+	@GetMapping("/name/{name}/attributes")
+	@JsonView(GladiatorViews.Attributes.class)
+	ResponseEntity<Gladiator> findOneByNameAttributes(@PathVariable String name) {
 		return ResponseEntity.ok(findOneByName(name));
 	}
 

@@ -26,23 +26,29 @@ public class Gladiator extends BaseEntity {
 	@Enumerated(EnumType.STRING)
 	private GladiatorType type;
 
-	public static Integer health = 100;
+	public static Integer hitPoint = 100;
+	public static Integer baseParadeChancePercentage = 0;
+	public static Integer baseEvasionChancePercentage = 15;
 
 	public Gladiator() {
 	}
 
-	public Gladiator(String name, GladiatorType type) {
+	public Gladiator(
+			String name,
+			GladiatorType type) {
 		this.name = name;
 		this.type = type;
 	}
 
 	@JsonView(GladiatorViews.Summary.class)
 	public Integer getId() {
+		// json.id
 		return super.getId();
 	}
 
 	@JsonView(GladiatorViews.Summary.class)
 	public String getName() {
+		// json.name
 		return this.name;
 	}
 
@@ -52,6 +58,7 @@ public class Gladiator extends BaseEntity {
 
 	@JsonView(GladiatorViews.Summary.class)
 	public GladiatorType getType() {
+		// json.type
 		return this.type;
 	}
 
@@ -59,58 +66,111 @@ public class Gladiator extends BaseEntity {
 		this.type = type;
 	}
 
-	@JsonView(GladiatorViews.Ability.class)
-	public Map<String, Object> getAbility() {
-		Map<String, Object> ability = new HashMap<String, Object>();
-		ability.put("health", health);
+	@JsonView(GladiatorViews.Attributes.class)
+	public Integer getHitPoint() {
+		// json.hitPoint
+		return hitPoint;
+	}
 
-		Map<String, Integer> damage = new HashMap<String, Integer>();
+	@JsonView(GladiatorViews.Attributes.class)
+	public Map<String, Object> getAttack() {
+		// json.attack
+		Map<String, Object> attack = new HashMap<String, Object>();
+
+		// json.attack.damage
+		Map<String, Object> damage = new HashMap<String, Object>();
 		damage.put("minimum", type.getWeapon().getDamage().getMinimum());
 		damage.put("maximum", type.getWeapon().getDamage().getMaximum());
-		damage.put("criticalPercentage", type.getWeapon().getDamage().getCriticalPercentage());
-		ability.put("damage", damage);
+		attack.put("damage", damage);
 
-		Map<String, Integer> resistance = new HashMap<String, Integer>();
-		Integer resHead, resUpperBody, resLowerBody;
-		resHead = resUpperBody = resLowerBody = 0;
+		// json.attack.criticalHit
+		Map<String, Object> criticalHit = new HashMap<String, Object>();
+		criticalHit.put("chancePercentage", type.getWeapon().getCriticalHit().getChancePercentage());
+		criticalHit.put("multiplier", type.getWeapon().getCriticalHit().getMultiplier());
+		attack.put("criticalHit", criticalHit);
+
+		return attack;
+	}
+
+	@JsonView(GladiatorViews.Attributes.class)
+	public Map<String, Object> getDefense() {
+		// json.defense
+		Map<String, Object> defense = new HashMap<String, Object>();
+
+		// json.defense.resistance
+		Map<String, Object> resistance = new HashMap<String, Object>();
+		Integer resistanceHeadReductionPercentage = 0,
+				resistanceUpperBodyReductionPercentage = 0,
+				resistanceLowerBodyReductionPercentage = 0;
 		for (ArmourComponent armourComponent : type.getArmourSet()) {
-			resHead += armourComponent.getResistance().getHead();
-			resUpperBody += armourComponent.getResistance().getUpperBody();
-			resLowerBody += armourComponent.getResistance().getLowerBody();
+			resistanceHeadReductionPercentage += armourComponent.getResistance().getHeadReductionPercentage();
+			resistanceUpperBodyReductionPercentage += armourComponent.getResistance().getUpperBodyReductionPercentage();
+			resistanceLowerBodyReductionPercentage += armourComponent.getResistance().getLowerBodyReductionPercentage();
 		}
-		resistance.put("head", resHead);
-		resistance.put("upperBody", resUpperBody);
-		resistance.put("lowerBody", resLowerBody);
-		ability.put("resistance", resistance);
+		resistance.put("headReductionPercentage", resistanceHeadReductionPercentage);
+		resistance.put("upperBodyReductionPercentage", resistanceUpperBodyReductionPercentage);
+		resistance.put("lowerBodyReductionPercentage", resistanceLowerBodyReductionPercentage);
+		defense.put("resistance", resistance);
 
-		return ability;
+		// json.defense.paradeChancePercentage
+		Integer paradeChancePercentage = baseParadeChancePercentage;
+		for (ArmourComponent armourComponent : type.getArmourSet()) {
+			paradeChancePercentage += armourComponent.getParadeChancePercentage();
+		}
+		defense.put("paradeChancePercentage", paradeChancePercentage);
+
+		// json.defense.evasionChancePercentage
+		Integer evasionChancePercentage = baseEvasionChancePercentage;
+		for (ArmourComponent armourComponent : type.getArmourSet()) {
+			evasionChancePercentage -= armourComponent.getEvasionPenaltyPercentage();
+		}
+		defense.put("evasionChancePercentage", evasionChancePercentage);
+
+		return defense;
 	}
 
 	@JsonView(GladiatorViews.Equipment.class)
 	public Map<String, Object> getEquipment() {
+		// json.equipment
 		Map<String, Object> equipment = new HashMap<String, Object>();
 
+		// json.equipment.weapon
 		Map<String, Object> weapon = new HashMap<String, Object>();
 		weapon.put("name", type.getWeapon().getName());
+		weapon.put("type", type.getWeapon().getType());
 
-		Map<String, Integer> weaponDamage = new HashMap<String, Integer>();
+		// json.equipment.weapon.damage
+		Map<String, Object> weaponDamage = new HashMap<String, Object>();
 		weaponDamage.put("minimum", type.getWeapon().getDamage().getMinimum());
 		weaponDamage.put("maximum", type.getWeapon().getDamage().getMaximum());
-		weaponDamage.put("criticalPercentage", type.getWeapon().getDamage().getCriticalPercentage());
 		weapon.put("damage", weaponDamage);
+
+		// json.equipment.weapon.criticalHit
+		Map<String, Object> weaponCriticalHit = new HashMap<String, Object>();
+		weaponCriticalHit.put("chancePercentage", type.getWeapon().getCriticalHit().getChancePercentage());
+		weaponCriticalHit.put("multiplier", type.getWeapon().getCriticalHit().getMultiplier());
+		weapon.put("criticalHit", weaponCriticalHit);
 
 		equipment.put("weapon", weapon);
 
+		// json.equipment.armour[]
 		List<Object> armour = new ArrayList<Object>();
-
 		for (ArmourComponent armourComponent : type.getArmourSet()) {
+			// json.equipment.armour[].component
 			Map<String, Object> component = new HashMap<String, Object>();
 			component.put("name", armourComponent.getName());
+			component.put("type", armourComponent.getType());
+			component.put("paradeChancePercentage", armourComponent.getParadeChancePercentage());
+			component.put("evasionPenaltyPercentage", armourComponent.getEvasionPenaltyPercentage());
 
-			Map<String, Integer> componentResistance = new HashMap<String, Integer>();
-			componentResistance.put("head", armourComponent.getResistance().getHead());
-			componentResistance.put("upperBody", armourComponent.getResistance().getUpperBody());
-			componentResistance.put("lowerBody", armourComponent.getResistance().getLowerBody());
+			// json.equipment.armour[].component.resistance
+			Map<String, Object> componentResistance = new HashMap<String, Object>();
+			componentResistance.put("headReductionPercentage",
+					armourComponent.getResistance().getHeadReductionPercentage());
+			componentResistance.put("upperBodyReductionPercentage",
+					armourComponent.getResistance().getUpperBodyReductionPercentage());
+			componentResistance.put("lowerBodyReductionPercentage",
+					armourComponent.getResistance().getLowerBodyReductionPercentage());
 			component.put("resistance", componentResistance);
 
 			armour.add(component);

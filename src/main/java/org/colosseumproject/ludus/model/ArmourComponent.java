@@ -1,43 +1,73 @@
 package org.colosseumproject.ludus.model;
 
-public enum ArmourComponent {
+enum ArmourComponent {
 
 	SCUTUM(
-			"scutum",
-			new ArmourResistance(0, 3, 2)),
+			"scutum", "shield",
+			new ArmourComponentResistance(5, 10, 10),
+			15, 5),
 	PARMA(
-			"parma",
-			new ArmourResistance(0, 4, 0)),
+			"parma", "shield",
+			new ArmourComponentResistance(5, 10, 0),
+			12, 2),
 	CASSISCRISTA(
-			"cassis-crista",
-			new ArmourResistance(3, 0, 0)),
+			"cassis-crista", "helmet",
+			new ArmourComponentResistance(15, 0, 0),
+			0, 5),
 	GALEA(
-			"galea",
-			new ArmourResistance(2, 0, 0)),
+			"galea", "helmet",
+			new ArmourComponentResistance(10, 0, 0),
+			0, 2),
 	MANICAE(
-			"manicae",
-			new ArmourResistance(0, 3, 0)),
+			"manicae", "bracers",
+			new ArmourComponentResistance(0, 5, 0),
+			1, 1),
 	OCREA(
-			"ocrea",
-			new ArmourResistance(0, 0, 3)),
+			"ocrea", "greaves",
+			new ArmourComponentResistance(0, 0, 5),
+			1, 1),
 	BALTEUS(
-			"balteus",
-			new ArmourResistance(0, 1, 0));
+			"balteus", "belt",
+			new ArmourComponentResistance(0, 5, 0),
+			0, 0);
 
 	private String name;
-	private ArmourResistance resistance;
+	private String type;
+	private ArmourComponentResistance resistance;
+	private Integer paradeChancePercentage;
+	private Integer evasionPenaltyPercentage;
 
-	ArmourComponent(String name, ArmourResistance resistance) {
+	ArmourComponent(
+			String name,
+			String type,
+			ArmourComponentResistance resistance,
+			Integer paradeChancePercentage,
+			Integer evasionPenaltyPercentage) {
 		this.name = name;
+		this.type = type;
 		this.resistance = resistance;
+		this.paradeChancePercentage = paradeChancePercentage;
+		this.evasionPenaltyPercentage = evasionPenaltyPercentage;
 	}
 
 	String getName() {
 		return name;
 	}
 
-	ArmourResistance getResistance() {
+	String getType() {
+		return type;
+	}
+
+	ArmourComponentResistance getResistance() {
 		return resistance;
+	}
+
+	Integer getParadeChancePercentage() {
+		return paradeChancePercentage;
+	}
+
+	Integer getEvasionPenaltyPercentage() {
+		return evasionPenaltyPercentage;
 	}
 
 }

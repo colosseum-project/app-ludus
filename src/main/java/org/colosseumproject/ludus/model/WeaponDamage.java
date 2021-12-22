@@ -4,12 +4,12 @@ class WeaponDamage {
 
 	private Integer minimum;
 	private Integer maximum;
-	private Integer criticalPercentage;
 
-	WeaponDamage(Integer minimum, Integer maximum, Integer criticalPercentage) {
+	WeaponDamage(
+			Integer minimum,
+			Integer maximum) {
 		this.minimum = minimum;
 		this.maximum = maximum;
-		this.criticalPercentage = criticalPercentage;
 	}
 
 	Integer getMinimum() {
@@ -18,10 +18,6 @@ class WeaponDamage {
 
 	Integer getMaximum() {
 		return maximum;
-	}
-
-	Integer getCriticalPercentage() {
-		return criticalPercentage;
 	}
 
 }
