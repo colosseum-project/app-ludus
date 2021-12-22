@@ -22,8 +22,8 @@ services:
     restart: always
     environment:
       DB_URL: jdbc:mariadb://database:3306/ludus
-      DB_USERNAME:
-      DB_PASSWORD:
+      DB_USERNAME: ludus
+      DB_PASSWORD: ludus
 
 volumes:
   data:
