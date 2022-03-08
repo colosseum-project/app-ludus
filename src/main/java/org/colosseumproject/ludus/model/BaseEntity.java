@@ -8,17 +8,17 @@ import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
-class BaseEntity implements Serializable {
+public class BaseEntity implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 
-	Integer getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	void setId(Integer id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
