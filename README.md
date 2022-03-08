@@ -11,9 +11,11 @@ See [LICENSE](LICENSE) for more information or see <https://opensource.org/licen
 
 **Table of content:**
 
-- [Contributing](#contributing)
-- [Build OCI image](#build-oci-image)
-- [Generate API docs](#generate-api-docs)
+- [Colosseum Project - Ludus](#colosseum-project---ludus)
+  - [License](#license)
+  - [Contributing](#contributing)
+  - [Build OCI image](#build-oci-image)
+  - [Generate API docs](#generate-api-docs)
 
 ## Contributing
 

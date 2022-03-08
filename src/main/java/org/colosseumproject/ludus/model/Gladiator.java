@@ -49,7 +49,7 @@ public class Gladiator extends BaseEntity {
 	@JsonView(GladiatorViews.Summary.class)
 	public String getName() {
 		// json.name
-		return this.name;
+		return name;
 	}
 
 	public void setName(String name) {
@@ -59,7 +59,7 @@ public class Gladiator extends BaseEntity {
 	@JsonView(GladiatorViews.Summary.class)
 	public GladiatorType getType() {
 		// json.type
-		return this.type;
+		return type;
 	}
 
 	public void setType(GladiatorType type) {

@@ -96,3 +96,14 @@ include::{snippets}/gladiators/types/curl-request.adoc[]
 
 .response
 include::{snippets}/gladiators/types/http-response.adoc[]
+
+== Resolve a duel
+
+.request
+include::{snippets}/duels/resolve/http-request.adoc[]
+
+.request with cURL
+include::{snippets}/duels/resolve/curl-request.adoc[]
+
+.response
+include::{snippets}/duels/resolve/http-response.adoc[]
