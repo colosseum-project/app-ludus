@@ -21,6 +21,8 @@ import org.colosseumproject.ludus.view.DuelResultViews;
 @Table(name = "duel_results")
 public class DuelResult extends BaseEntity {
 
+	// TODO Replace FetchType.EAGER by FetchType.LAZY to reduce performance impact
+
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "gladiator_1_id", nullable = false)
 	private Gladiator firstGladiator;
@@ -35,10 +37,13 @@ public class DuelResult extends BaseEntity {
 
 	@Column(name = "combat_log")
 	@OrderColumn
-	@ElementCollection()
+	@ElementCollection(fetch = FetchType.EAGER)
 	List<String> combatLogs;
 
 	private Timestamp timestamp;
+
+	public DuelResult() {
+	}
 
 	public DuelResult(
 			Gladiator firstGladiator,

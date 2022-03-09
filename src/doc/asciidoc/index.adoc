@@ -107,3 +107,25 @@ include::{snippets}/duels/resolve/curl-request.adoc[]
 
 .response
 include::{snippets}/duels/resolve/http-response.adoc[]
+
+== Find all duel results
+
+.request
+include::{snippets}/duels/results/find-all/http-request.adoc[]
+
+.request with cURL
+include::{snippets}/duels/results/find-all/curl-request.adoc[]
+
+.response
+include::{snippets}/duels/results/find-all/http-response.adoc[]
+
+== Find a duel result
+
+.request
+include::{snippets}/duels/results/find-one/http-request.adoc[]
+
+.request with cURL
+include::{snippets}/duels/results/find-one/curl-request.adoc[]
+
+.response
+include::{snippets}/duels/results/find-one/http-response.adoc[]

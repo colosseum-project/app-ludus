@@ -1,15 +1,20 @@
 package org.colosseumproject.ludus.controller;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonView;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.annotation.JsonView;
-
 import org.colosseumproject.ludus.exception.DuelErrorException;
+import org.colosseumproject.ludus.exception.DuelResultNotFoundException;
 import org.colosseumproject.ludus.exception.GladiatorNotFoundException;
 import org.colosseumproject.ludus.model.Duel;
 import org.colosseumproject.ludus.model.DuelResult;
@@ -48,6 +53,18 @@ public class DuelController {
 				duel.getWinner(),
 				duel.getCombatLogs());
 		return ResponseEntity.ok(duelResults.save(duelResult));
+	}
+
+	@GetMapping("results")
+	@JsonView(DuelResultViews.Default.class)
+	ResponseEntity<List<DuelResult>> findAll() {
+		return ResponseEntity.ok(duelResults.findAll());
+	}
+
+	@GetMapping("results/{id}")
+	@JsonView(DuelResultViews.Default.class)
+	ResponseEntity<DuelResult> findOneDefault(@PathVariable Integer id) {
+		return ResponseEntity.ok(duelResults.findById(id).orElseThrow(() -> new DuelResultNotFoundException(id)));
 	}
 
 }
