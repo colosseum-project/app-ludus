@@ -9,6 +9,6 @@ spring:
     console:
       enabled: true
   datasource:
-    url: jdbc:h2:mem:mydb
+    url: jdbc:h2:mem:ludus
     username: ludus
     password: ludus
