@@ -59,6 +59,12 @@ public class DuelResult extends BaseEntity {
 	}
 
 	@JsonView(DuelResultViews.Default.class)
+	public Integer getId() {
+		// json.id
+		return super.getId();
+	}
+
+	@JsonView(DuelResultViews.Default.class)
 	public Gladiator getFirstGladiator() {
 		// json.firstGladiator
 		return firstGladiator;
