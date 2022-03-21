@@ -33,7 +33,7 @@ public class DuelController {
 	private DuelResultRepository duelResults;
 
 	@PostMapping("resolve")
-	@JsonView(DuelResultViews.Default.class)
+	@JsonView(DuelResultViews.Detailed.class)
 	ResponseEntity<DuelResult> engage(
 			@RequestParam("first_gladiator_id") Integer firstGladiatorId,
 			@RequestParam("second_gladiator_id") Integer secondGladiatorId) {
@@ -56,14 +56,14 @@ public class DuelController {
 	}
 
 	@GetMapping("results")
-	@JsonView(DuelResultViews.Default.class)
+	@JsonView(DuelResultViews.Summary.class)
 	ResponseEntity<List<DuelResult>> findAll() {
 		return ResponseEntity.ok(duelResults.findAll());
 	}
 
 	@GetMapping("results/{id}")
-	@JsonView(DuelResultViews.Default.class)
-	ResponseEntity<DuelResult> findOneDefault(@PathVariable Integer id) {
+	@JsonView(DuelResultViews.Detailed.class)
+	ResponseEntity<DuelResult> findOne(@PathVariable Integer id) {
 		return ResponseEntity.ok(duelResults.findById(id).orElseThrow(() -> new DuelResultNotFoundException(id)));
 	}
 

@@ -2,7 +2,10 @@ package org.colosseumproject.ludus.view;
 
 public class DuelResultViews {
 
-	public interface Default extends GladiatorViews.Summary {
+	public interface Summary extends GladiatorViews.Summary {
+	}
+
+	public interface Detailed extends Summary {
 	}
 
 }
