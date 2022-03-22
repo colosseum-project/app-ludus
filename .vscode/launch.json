@@ -6,7 +6,9 @@
             "request": "launch",
             "mainClass": "org.colosseumproject.ludus.LudusApplication",
             "projectName": "ludus",
-            "args": "--spring.profiles.active=development"
-        }
+            "args": [
+                "--spring.profiles.active=development"
+            ],
+        },
     ]
 }
