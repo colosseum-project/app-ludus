@@ -1,5 +1,6 @@
 package org.colosseumproject.ludus.controller;
 
+import java.util.Collections;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonView;
@@ -18,6 +19,7 @@ import org.colosseumproject.ludus.exception.DuelResultNotFoundException;
 import org.colosseumproject.ludus.exception.GladiatorNotFoundException;
 import org.colosseumproject.ludus.model.Duel;
 import org.colosseumproject.ludus.model.DuelResult;
+import org.colosseumproject.ludus.model.Gladiator;
 import org.colosseumproject.ludus.repository.DuelResultRepository;
 import org.colosseumproject.ludus.repository.GladiatorRepository;
 import org.colosseumproject.ludus.view.DuelResultViews;
@@ -32,16 +34,8 @@ public class DuelController {
 	@Autowired
 	private DuelResultRepository duelResults;
 
-	@PostMapping("resolve")
-	@JsonView(DuelResultViews.Detailed.class)
-	ResponseEntity<DuelResult> engage(
-			@RequestParam("first_gladiator_id") Integer firstGladiatorId,
-			@RequestParam("second_gladiator_id") Integer secondGladiatorId) {
-		Duel duel = new Duel(
-				gladiators.findById(firstGladiatorId)
-						.orElseThrow(() -> new GladiatorNotFoundException(firstGladiatorId)),
-				gladiators.findById(secondGladiatorId)
-						.orElseThrow(() -> new GladiatorNotFoundException(secondGladiatorId)));
+	ResponseEntity<DuelResult> resolve(Gladiator firstGladiator, Gladiator secondGladiator) {
+		Duel duel = new Duel(firstGladiator, secondGladiator);
 		try {
 			duel.resolve();
 		} catch (Exception e) {
@@ -52,6 +46,29 @@ public class DuelController {
 		} else {
 			throw new DuelErrorException("Duel has not been resolved.");
 		}
+	}
+
+	@PostMapping("resolve")
+	@JsonView(DuelResultViews.Detailed.class)
+	ResponseEntity<DuelResult> resolveChoice(
+			@RequestParam("first_gladiator_id") Integer firstGladiatorId,
+			@RequestParam("second_gladiator_id") Integer secondGladiatorId) {
+		return resolve(
+				gladiators.findById(firstGladiatorId)
+						.orElseThrow(() -> new GladiatorNotFoundException(firstGladiatorId)),
+				gladiators.findById(secondGladiatorId)
+						.orElseThrow(() -> new GladiatorNotFoundException(secondGladiatorId)));
+	}
+
+	@PostMapping("resolve/random")
+	@JsonView(DuelResultViews.Detailed.class)
+	ResponseEntity<DuelResult> resolveRandom() {
+		if (gladiators.count() < 2) {
+			throw new DuelErrorException("Not enough registered gladiators to engage a random duel.");
+		}
+		List<Gladiator> g = gladiators.findAll();
+		Collections.shuffle(g);
+		return resolve(g.remove(0), g.remove(0));
 	}
 
 	@GetMapping("results")
