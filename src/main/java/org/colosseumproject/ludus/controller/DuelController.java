@@ -47,12 +47,11 @@ public class DuelController {
 		} catch (Exception e) {
 			throw new DuelErrorException(e.getMessage());
 		}
-		DuelResult duelResult = new DuelResult(
-				duel.getFirstGladiator(),
-				duel.getSecondGladiator(),
-				duel.getWinner(),
-				duel.getCombatLogs());
-		return ResponseEntity.ok(duelResults.save(duelResult));
+		if (duel.IsResolved()) {
+			return ResponseEntity.ok(duelResults.save(duel.getDuelResult()));
+		} else {
+			throw new DuelErrorException("Duel has not been resolved.");
+		}
 	}
 
 	@GetMapping("results")
