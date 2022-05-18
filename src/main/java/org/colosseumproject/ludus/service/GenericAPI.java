@@ -14,10 +14,6 @@ public class GenericAPI {
 
 	protected String endpoint;
 
-	public void setEndpoint(String endpoint) {
-		this.endpoint = endpoint;
-	}
-
 	public String postJson(String context, String requestBody) {
 		String responseBody = null;
 
