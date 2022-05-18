@@ -14,7 +14,7 @@ import org.colosseumproject.ludus.model.Gladiator;
 public class ArenaAPI extends GenericAPI {
 
 	public ArenaAPI() {
-		endpoint = "http://localhost:8081";
+		endpoint = "http://localhost:8082";
 	}
 
 	public DuelResult resolveDuel(Gladiator firstGladiator, Gladiator secondGladiator) {

@@ -18,7 +18,7 @@ services:
       - database
     image: ludus:latest
     ports:
-      - 8080:8080
+      - 8081:8081
     restart: always
     environment:
       DB_URL: jdbc:mariadb://database:3306/ludus
