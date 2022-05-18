@@ -5,6 +5,8 @@
     - [Quick run](#quick-run)
     - [Run with a production-style database](#run-with-a-production-style-database)
 
+---
+
 ## Contributing Code
 
 _Note: Theses instructions are for linux base systems. Please, adapt them if you are using another operating system._
