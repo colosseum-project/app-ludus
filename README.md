@@ -2,8 +2,6 @@
 
 Microservice application part of the Colosseum Project and responsible for the management of the gladiators.
 
-**Table of content**
-
 - [Colosseum Project - Ludus](#colosseum-project---ludus)
   - [License](#license)
   - [Contributing](#contributing)
