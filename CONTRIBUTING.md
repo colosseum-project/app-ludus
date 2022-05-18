@@ -1,11 +1,13 @@
 # Contributing
 
-_Note: Theses instructions are for linux base systems. Please, adapt them if you are using another operating system._
+- [Contributing](#contributing)
+  - [Contributing Code](#contributing-code)
+    - [Quick run](#quick-run)
+    - [Run with a production-style database](#run-with-a-production-style-database)
 
 ## Contributing Code
 
-- [Quick run](#quick-run)
-- [Run with a production-style database](#run-with-a-production-style-database)
+_Note: Theses instructions are for linux base systems. Please, adapt them if you are using another operating system._
 
 ### Quick run
 
