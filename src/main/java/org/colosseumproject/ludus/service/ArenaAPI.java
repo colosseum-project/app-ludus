@@ -10,12 +10,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.colosseumproject.ludus.exception.APIErrorException;
 import org.colosseumproject.ludus.model.DuelResult;
 import org.colosseumproject.ludus.model.Gladiator;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ArenaAPI extends GenericAPI {
-
-	public ArenaAPI() {
-		endpoint = "http://localhost:8082";
-	}
 
 	public DuelResult resolveDuel(Gladiator firstGladiator, Gladiator secondGladiator) {
 		String requestJson, response;
@@ -28,7 +26,7 @@ public class ArenaAPI extends GenericAPI {
 			throw new APIErrorException("JSON processing exception: " + e.getMessage());
 		}
 
-		response = postWithBody("/duel", requestJson);
+		response = postJson("/duel", requestJson);
 
 		DuelResult duelResult = new DuelResult();
 		int winnerId;

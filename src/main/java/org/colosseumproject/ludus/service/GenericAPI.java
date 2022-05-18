@@ -7,17 +7,23 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import org.colosseumproject.ludus.exception.APIErrorException;
+import org.springframework.stereotype.Service;
 
+@Service
 public class GenericAPI {
 
-	String endpoint;
+	protected String endpoint;
 
-	public String postWithBody(String urlContext, String requestBody) {
+	public void setEndpoint(String endpoint) {
+		this.endpoint = endpoint;
+	}
+
+	public String postJson(String context, String requestBody) {
 		String responseBody = null;
 
 		try {
 			URL url;
-			url = new URL(endpoint + urlContext);
+			url = new URL(endpoint + context);
 
 			HttpURLConnection con;
 			con = (HttpURLConnection) url.openConnection();
