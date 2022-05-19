@@ -20,11 +20,13 @@ _Note: Theses instructions are for linux base systems. Please, adapt them if you
    cd ludus
    ```
 
-2. Create dotenv file (`.env`) and set variables
+2. Set the environment variables
+
+   _If you use VSCode, you can copy the `.env.example` file as `.env` and set the variables from the dotenv file._
 
    ```sh
-   SPRING_PROFILES_ACTIVE=development
-   ARENA_ENDPOINT=http://localhost:8082
+   export SPRING_PROFILES_ACTIVE=development
+   export ARENA_ENDPOINT=http://localhost:8082
    ```
 
    _This profile use an in-memory database on H2 Database Engine._
@@ -63,16 +65,16 @@ The following instructions use a MariaDB database that runs on a local Docker in
 
    _The database schema will be automatically created by the application._
 
-3. Create dotenv file (`.env`) and set variables
+3. Set the environment variables
 
-   _You can copy the `.env.example` file._
+   _If you use VSCode, you can copy the `.env.example` file as `.env` and set the variables from the dotenv file._
 
    ```sh
-   SPRING_PROFILES_ACTIVE=production,debugmode
-   DB_URL=jdbc:mariadb://localhost:3306/ludus
-   DB_USERNAME=ludus
-   DB_PASSWORD=ludus
-   ARENA_ENDPOINT=http://localhost:8082
+   export SPRING_PROFILES_ACTIVE=production,debugmode
+   export DB_URL=jdbc:mariadb://localhost:3306/ludus
+   export DB_USERNAME=ludus
+   export DB_PASSWORD=ludus
+   export ARENA_ENDPOINT=http://localhost:8082
    ```
 
 4. Run the application
