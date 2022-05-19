@@ -9,7 +9,8 @@
 
 ## Contributing Code
 
-_Note: Theses instructions are for linux base systems. Please, adapt them if you are using another operating system._
+_Note: Theses instructions are for linux base systems._
+_Please, adapt them if you are using another operating system._
 
 ### Quick run
 
@@ -29,7 +30,7 @@ _Note: Theses instructions are for linux base systems. Please, adapt them if you
    export ARENA_ENDPOINT=http://localhost:8082
    ```
 
-   _This profile use an in-memory database on H2 Database Engine._
+   _This profile uses an in-memory database on H2 Database Engine._
    _You can access to the console via `/h2-console`._
 
 3. Run the application
