@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 @ConfigurationProperties(prefix = "arena")
 public class ArenaConfiguration {
 
-	private String endpoint;
+	private String endpoint = "http://localhost:8082";
 
 	public String getEndpoint() {
 		return endpoint;

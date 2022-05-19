@@ -26,5 +26,3 @@ logging:
   level:
     org:
       springframework: INFO
-arena:
-  endpoint: http://localhost:8082
