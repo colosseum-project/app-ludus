@@ -27,4 +27,4 @@ logging:
     org:
       springframework: INFO
 arena:
-  endpoint: ${ARENA_ENDPOINT:http://localhost:8082}
+  endpoint: http://localhost:8082
