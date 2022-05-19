@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 import org.colosseumproject.ludus.exception.DuelErrorException;
 import org.colosseumproject.ludus.exception.DuelResultNotFoundException;
 import org.colosseumproject.ludus.exception.GladiatorNotFoundException;
-import org.colosseumproject.ludus.model.Duel;
 import org.colosseumproject.ludus.model.DuelResult;
 import org.colosseumproject.ludus.model.Gladiator;
 import org.colosseumproject.ludus.repository.DuelResultRepository;
 import org.colosseumproject.ludus.repository.GladiatorRepository;
+import org.colosseumproject.ludus.service.ArenaAPI;
 import org.colosseumproject.ludus.view.DuelResultViews;
 
 @RestController
@@ -34,18 +34,17 @@ public class DuelController {
 	@Autowired
 	private DuelResultRepository duelResults;
 
+	@Autowired
+	private ArenaAPI arenaApi;
+
 	ResponseEntity<DuelResult> resolve(Gladiator firstGladiator, Gladiator secondGladiator) {
-		Duel duel = new Duel(firstGladiator, secondGladiator);
-		try {
-			duel.resolve();
-		} catch (Exception e) {
-			throw new DuelErrorException(e.getMessage());
+		if (firstGladiator.getId().equals(secondGladiator.getId())) {
+			throw new DuelErrorException("Same gladiator.");
 		}
-		if (duel.IsResolved()) {
-			return ResponseEntity.ok(duelResults.save(duel.getDuelResult()));
-		} else {
-			throw new DuelErrorException("Duel has not been resolved.");
-		}
+		DuelResult duelResult = arenaApi.resolveDuel(firstGladiator, secondGladiator);
+		duelResult.setFirstGladiator(firstGladiator);
+		duelResult.setSecondGladiator(secondGladiator);
+		return ResponseEntity.ok(duelResults.save(duelResult));
 	}
 
 	@PostMapping("resolve")

@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.colosseumproject.ludus.configuration.ArenaConfiguration;
 import org.colosseumproject.ludus.exception.APIErrorException;
 import org.colosseumproject.ludus.model.DuelResult;
 import org.colosseumproject.ludus.model.Gladiator;
@@ -14,6 +15,13 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ArenaAPI extends GenericAPI {
+
+	ArenaConfiguration config;
+
+	public ArenaAPI(ArenaConfiguration config) {
+		this.config = config;
+		endpoint = config.getEndpoint();
+	}
 
 	public DuelResult resolveDuel(Gladiator firstGladiator, Gladiator secondGladiator) {
 		String requestJson, response;
