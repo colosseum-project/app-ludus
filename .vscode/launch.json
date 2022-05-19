@@ -7,9 +7,6 @@
             "mainClass": "org.colosseumproject.ludus.LudusApplication",
             "projectName": "ludus",
             "envFile": "${workspaceFolder}/.env",
-            "env": {
-                "SPRING_PROFILES_ACTIVE": "development",
-            },
         },
     ]
 }
