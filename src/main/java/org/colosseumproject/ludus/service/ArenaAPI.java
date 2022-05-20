@@ -11,9 +11,7 @@ import org.colosseumproject.ludus.configuration.ArenaConfiguration;
 import org.colosseumproject.ludus.exception.APIErrorException;
 import org.colosseumproject.ludus.model.DuelResult;
 import org.colosseumproject.ludus.model.Gladiator;
-import org.springframework.stereotype.Service;
 
-@Service
 public class ArenaAPI extends GenericAPI {
 
 	ArenaConfiguration config;
@@ -33,7 +31,6 @@ public class ArenaAPI extends GenericAPI {
 		} catch (JsonProcessingException e) {
 			throw new APIErrorException("JSON processing exception: " + e.getMessage());
 		}
-
 		response = postJson("/duel", requestJson);
 
 		DuelResult duelResult = new DuelResult();

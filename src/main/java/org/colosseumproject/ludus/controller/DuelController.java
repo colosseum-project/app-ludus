@@ -41,9 +41,12 @@ public class DuelController {
 		if (firstGladiator.getId().equals(secondGladiator.getId())) {
 			throw new DuelErrorException("Same gladiator.");
 		}
-		DuelResult duelResult = arenaApi.resolveDuel(firstGladiator, secondGladiator);
-		duelResult.setFirstGladiator(firstGladiator);
-		duelResult.setSecondGladiator(secondGladiator);
+		DuelResult duelResult;
+		try {
+			duelResult = arenaApi.resolveDuel(firstGladiator, secondGladiator);
+		} catch (Exception e) {
+			throw new DuelErrorException(e.getMessage());
+		}
 		return ResponseEntity.ok(duelResults.save(duelResult));
 	}
 
