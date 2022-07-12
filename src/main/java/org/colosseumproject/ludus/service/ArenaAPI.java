@@ -11,7 +11,9 @@ import org.colosseumproject.ludus.configuration.ArenaConfiguration;
 import org.colosseumproject.ludus.exception.APIErrorException;
 import org.colosseumproject.ludus.model.DuelResult;
 import org.colosseumproject.ludus.model.Gladiator;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ArenaAPI extends GenericAPI {
 
 	ArenaConfiguration config;
