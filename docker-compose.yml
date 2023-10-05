@@ -16,7 +16,7 @@ services:
   ludus:
     depends_on:
       - database
-    image: ludus:latest
+    image: colosseum-project/ludus:latest
     ports:
       - 8081:8081
     restart: always
