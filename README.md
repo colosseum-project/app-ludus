@@ -25,7 +25,7 @@ Images can be built using the `bootBuildImage` Gradle task.
 To build an image, run:
 
 ```sh
-./gradlew bootBuildImage --imageName=ludus
+./gradlew bootBuildImage --imageName=colosseum-project/ludus
 ```
 
 _It creates an optimized image using [Buildpack](https://buildpacks.io/)._

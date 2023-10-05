@@ -6,7 +6,7 @@
         {
             "label": "Build container image",
             "type": "shell",
-            "command": "./gradlew bootBuildImage --imageName=ludus"
+            "command": "./gradlew bootBuildImage --imageName=colosseum-project/ludus"
         }
     ]
 }
