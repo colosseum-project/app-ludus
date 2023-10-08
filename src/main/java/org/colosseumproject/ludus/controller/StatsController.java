@@ -8,6 +8,7 @@ import org.colosseumproject.ludus.model.Gladiator;
 import org.colosseumproject.ludus.model.GladiatorType;
 import org.colosseumproject.ludus.repository.DuelResultRepository;
 import org.colosseumproject.ludus.repository.GladiatorRepository;
+import org.colosseumproject.ludus.service.Calculus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -57,13 +58,9 @@ public class StatsController {
 			}
 		}
 
-		Integer ratio_multiplier = 100;
 		for (Gladiator g : gladiators.findAll()) {
-			Double v = Double.valueOf(stats.get(g.getId()).get("duel_victory_count"));
-			Double d = Double.valueOf(stats.get(g.getId()).get("duel_defeat_count"));
-			Integer ratio = (int) (v / d * ratio_multiplier);
-			stats.get(g.getId()).put("ratio", ratio);
-			stats.get(g.getId()).put("ratio_multiplier", ratio_multiplier);
+			stats.get(g.getId()).put("ratio", Calculus.ratio(stats.get(g.getId()).get("duel_victory_count"),
+					stats.get(g.getId()).get("duel_defeat_count")));
 		}
 
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -104,13 +101,9 @@ public class StatsController {
 			}
 		}
 
-		Integer ratio_multiplier = 100;
 		for (GladiatorType gt : GladiatorType.values()) {
-			Double v = Double.valueOf(stats.get(gt).get("duel_victory_count"));
-			Double d = Double.valueOf(stats.get(gt).get("duel_defeat_count"));
-			Integer ratio = (int) (v / d * ratio_multiplier);
-			stats.get(gt).put("ratio", ratio);
-			stats.get(gt).put("ratio_multiplier", ratio_multiplier);
+			stats.get(gt).put("ratio", Calculus.ratio(stats.get(gt).get("duel_victory_count"),
+					stats.get(gt).get("duel_defeat_count")));
 		}
 
 		ObjectMapper objectMapper = new ObjectMapper();
