@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
+import jakarta.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -95,7 +97,7 @@ public class GladiatorController {
 
 	@PostMapping("")
 	@JsonView(GladiatorViews.Summary.class)
-	ResponseEntity<Gladiator> newOne(@RequestBody Gladiator gladiator) {
+	ResponseEntity<Gladiator> newOne(@Valid @RequestBody Gladiator gladiator) {
 		String name = gladiator.getName();
 		if (gladiators.findByName(name) != null) {
 			throw new GladiatorAlreadyExistsException(name);

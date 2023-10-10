@@ -10,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
@@ -20,6 +21,7 @@ import org.colosseumproject.ludus.view.GladiatorViews;
 public class Gladiator extends BaseEntity {
 
 	@Column(name = "name", unique = true, nullable = false)
+	@Pattern(regexp = "^[a-zA-Z]+$")
 	private String name;
 
 	@Column(name = "type", nullable = false)
