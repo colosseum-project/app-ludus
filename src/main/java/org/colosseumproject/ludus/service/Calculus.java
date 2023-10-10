@@ -1,5 +1,6 @@
 package org.colosseumproject.ludus.service;
 
+// TODO To be removed from this application
 public class Calculus {
 	public static Integer ratio(Integer antecedent, Integer consequent) {
 		Integer ratioMultiplier = 100;
