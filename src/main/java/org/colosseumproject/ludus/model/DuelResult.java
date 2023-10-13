@@ -58,13 +58,13 @@ public class DuelResult extends BaseEntity {
 		timestamp = new Timestamp(System.currentTimeMillis());
 	}
 
-	@JsonView(DuelResultViews.Summary.class)
+	@JsonView(DuelResultViews.IdOnly.class)
 	public Integer getId() {
 		// json.id
 		return super.getId();
 	}
 
-	@JsonView(DuelResultViews.Summary.class)
+	@JsonView(DuelResultViews.IdOnly.class)
 	public Gladiator getFirstGladiator() {
 		// json.firstGladiator
 		return firstGladiator;
@@ -74,7 +74,7 @@ public class DuelResult extends BaseEntity {
 		firstGladiator = gladiator;
 	}
 
-	@JsonView(DuelResultViews.Summary.class)
+	@JsonView(DuelResultViews.IdOnly.class)
 	public Gladiator getSecondGladiator() {
 		// json.secondGladiator
 		return secondGladiator;
@@ -84,7 +84,7 @@ public class DuelResult extends BaseEntity {
 		secondGladiator = gladiator;
 	}
 
-	@JsonView(DuelResultViews.Summary.class)
+	@JsonView(DuelResultViews.IdOnly.class)
 	public Gladiator getWinner() {
 		// json.secondGladiator
 		return winner;

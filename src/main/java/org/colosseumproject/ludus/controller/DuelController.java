@@ -79,6 +79,12 @@ public class DuelController {
 		return ResponseEntity.ok(duelResults.findAll());
 	}
 
+	@GetMapping("resultsid")
+	@JsonView(DuelResultViews.IdOnly.class)
+	ResponseEntity<List<DuelResult>> findAllId() {
+		return ResponseEntity.ok(duelResults.findAll());
+	}
+
 	@GetMapping("results/{id}")
 	@JsonView(DuelResultViews.Detailed.class)
 	ResponseEntity<DuelResult> findOne(@PathVariable Integer id) {

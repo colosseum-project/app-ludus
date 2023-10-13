@@ -42,7 +42,7 @@ public class Gladiator extends BaseEntity {
 		this.type = type;
 	}
 
-	@JsonView(GladiatorViews.Summary.class)
+	@JsonView(GladiatorViews.IdOnly.class)
 	public Integer getId() {
 		// json.id
 		return super.getId();
